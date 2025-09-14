@@ -22,3 +22,35 @@ venv/
 
 # PyCharm
 .idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django
+db.sqlite3
+*.sqlite3
+*.log
+migrations/
+
+# Virtual environment
+venv/
+
+
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django
+db.sqlite3
+*.sqlite3
+*.log
+migrations/
+
+# Virtual environment
+venv/
