@@ -26,3 +26,8 @@ class PostTests(TestCase):
         response = self.client.get(reverse("blog"))
         self.assertContains(response, "blog for start work")
         
+    def test_post(self):  
+        response = self.client.get(reverse("blog"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "blog.html")
+        self.assertContains(response, "blog for start work")
