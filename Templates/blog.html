@@ -3,6 +3,9 @@
   <h1>blog for start work</h1>
   <ul>
     {% for post in post_list %}
+        <div class="post-entry">
+            <h2><a href="">{{ post.title}}</a></h2>
+            <p>{{ post.auther}}</p>
     <li> {{ post.text }}</li>
     {% endfor %}
   </ul>  
