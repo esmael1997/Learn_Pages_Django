@@ -3,7 +3,9 @@ from django.urls import reverse
 
 class Post(models.Model):
     text = models.TextField()
+    
     auther = models.ForeignKey("auth.User", on_delete=models.CASCADE, null=False, blank=False)
+    
     title = models.CharField(max_length=255, default=" ")
     
     def __str__(self):
