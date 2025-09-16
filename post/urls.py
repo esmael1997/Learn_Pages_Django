@@ -5,6 +5,6 @@ from .views import Blog, BlogDetailView, BlogCreateView
 
 urlpatterns = [
     path('', Blog.as_view(), name="blog"),
-    
-    
+    path('<int:pk>/', BlogDetailView.as_view(), name='blog_detail'),
+    path('new/', BlogCreateView.as_view(), name='blog_new'),
 ]

@@ -4,9 +4,9 @@
   <ul>
     {% for post in post_list %}
         <div class="post-entry">
-            <h2><a href="">{{ post.title}}</a></h2>
-            <p>{{ post.auther}}</p>
-    <li> {{ post.text }}</li>
+            <h2><a href="{% url 'blog_detail' post.pk %}">{{ post.title}}</a></h2>
+            <p>{{ post.author}}</p>
+    <li> {{ post.body }}</li>
     {% endfor %}
   </ul>  
 {% endblock content %}
