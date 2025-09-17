@@ -1,35 +1,35 @@
 {% load static %}
 
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-    <title>Django blog</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Blog</title>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
-
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
-
 </head>
-
 <body>
+    <div>
+        <header>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                </ul>
 
-<div>
-    <header>
-        <div class="nav-left">
-            <h1><a href="{% url 'home' %}">Django blog</a></h1>
-        </div>
-        <div class="nav-right">
-            <a href="{% url 'blog_new' %}">+ New Blog Post</a>
-        </div>
-    </header>
+                
+                {% if request.resolver_match.url_name == 'blog' %}
+                    <a class="new-post-link" href="{% url 'post_new' %}">+ New Blog Post</a>
+                {% endif %}
+            </nav>
+        </header>
 
-    {% block content %}
-
-    {% endblock content %}
-
-</div>
-
+        
+        {% block content %}
+        {% endblock content %}
+    </div>
 </body>
-
 </html>

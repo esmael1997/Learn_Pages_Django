@@ -1,12 +1,170 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% block content %}
-  <h1>blog for start work</h1>
-  <ul>
-    {% for post in post_list %}
-        <div class="post-entry">
-            <h2><a href="{% url 'blog_detail' post.pk %}">{{ post.title}}</a></h2>
-            <p>{{ post.author}}</p>
-    <li> {{ post.body }}</li>
-    {% endfor %}
-  </ul>  
-{% endblock content %}
+<div class="container">
+    <h1 class="blog-title">Blog Posts</h1>
+    
+    {% if posts %}
+        <div class="posts-container">
+            {% for post in posts %}
+                <div class="post-card">
+                    <div class="post-header">
+                        <h2 class="post-title">
+                            <a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a>
+                        </h2>
+                        <div class="post-meta">
+                            <span class="author">By {{ post.author.username }}</span>
+                            <span class="date">| {{ post.created_at|date:"F d, Y" }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="post-content">
+                        <p>{{ post.body|truncatewords:40 }}</p>
+                    </div>
+                    
+                    <div class="post-actions">
+                        <a href="{% url 'blog_detail' post.pk %}" class="read-more-btn">Read More →</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">📝</div>
+            <h2>No Posts Yet</h2>
+            <p>Be the first to share your thoughts!</p>
+            <a href="{% url 'post_new' %}" class="create-btn">Create First Post</a>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    .blog-title {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        font-weight: 300;
+    }
+
+    .posts-container {
+        display: grid;
+        gap: 1.5rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .post-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        border: 1px solid #e0e0e0;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .post-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .post-header {
+        margin-bottom: 1rem;
+    }
+
+    .post-title {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.5rem;
+    }
+
+    .post-title a {
+        color: #2c3e50;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .post-title a:hover {
+        color: #3498db;
+    }
+
+    .post-meta {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+    }
+
+    .post-content {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+        color: #34495e;
+    }
+
+    .post-actions {
+        text-align: right;
+    }
+
+    .read-more-btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: background 0.2s ease;
+    }
+
+    .read-more-btn:hover {
+        background: #2980b9;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: #7f8c8d;
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    .empty-state h2 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .create-btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: #27ae60;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 500;
+        margin-top: 1rem;
+        transition: background 0.2s ease;
+    }
+
+    .create-btn:hover {
+        background: #219a52;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 1rem;
+        }
+        
+        .blog-title {
+            font-size: 2rem;
+        }
+        
+        .post-card {
+            padding: 1rem;
+        }
+        
+        .post-title {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+{% endblock %}

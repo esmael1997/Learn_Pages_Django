@@ -8,7 +8,7 @@ class Blog(ListView):
     
     template_name = "blog.html" 
     model = Post
-
+    context_object_name = "posts"
 class BlogDetailView(DetailView):
     
     model = Post
