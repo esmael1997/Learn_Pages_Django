@@ -12,30 +12,38 @@
 <body>
     <div>
         <header>
-            
-            <nav class="main-nav">
-                <ul>
+            <nav class="main-nav" style="display: flex; justify-content: space-between; align-items: center;">
+                
+                <!-- منو اصلی -->
+                <ul style="display: flex; gap: 20px; list-style: none; padding: 0; margin: 0;">
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'blog' %}">Blog</a></li>
                 </ul>
 
-                
+                <!-- لینک ایجاد پست جدید فقط در صفحه بلاگ -->
                 {% if request.resolver_match.url_name == 'blog' %}
                     <a class="new-post-link" href="{% url 'post_new' %}">+ New Blog Post</a>
                 {% endif %}
+
+                <!-- وضعیت کاربر -->
+                <div>
+                    {% if user.is_authenticated %}
+                        <span>Hi {{ user.username }}!</span>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-link">Log out</button>
+                        </form>
+                    {% else %}
+                        <span>You are not logged in.</span>
+                        <a href="{% url 'login' %}">Log In</a> |
+                        <a href="{% url 'signup' %}">Sign Up</a>
+                    {% endif %}
+                </div>
+
             </nav>
         </header>
 
-        {% if user.is_authenticated %}
-            <p>Hi {{ user.username }}!</p>
-            <p><a href="{% url 'logout' %}">Log out</a></p>
-        {% else %}
-            <p>You are not logged in.</p>
-            <a href="{% url 'login' %}">Log In</a>
-        {% endif %}
-
-        
         {% block content %}
         {% endblock content %}
     </div>
