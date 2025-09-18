@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth import authenticate, login
-from .form import LoginForm
+from .forms import LoginForm
 from .forms import SignUpForm
 
 
@@ -25,7 +25,7 @@ def login_view(request):
                 return redirect('home')  
     else:
         form = LoginForm()
-    return render(request, 'accounts/login.html', {'form': form})
+    return render(request, 'registration/login.html', {'form': form})
 
 def signup_view(request):
     if request.method == 'POST':
@@ -36,4 +36,4 @@ def signup_view(request):
             return redirect('home')  
     else:
         form = SignUpForm()
-    return render(request, 'accounts/signup.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form})

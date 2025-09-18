@@ -25,8 +25,13 @@ class BlogUpdateView(UpdateView):
     model = Post
     template_name = "post_edit.html"
     fields = ["title", "body"]    
-    
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
 class BlogDeleteView(DeleteView): 
     model = Post
     template_name = "post_delete.html"
     success_url = reverse_lazy("home")
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author

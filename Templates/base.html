@@ -14,19 +14,19 @@
         <header>
             <nav class="main-nav" style="display: flex; justify-content: space-between; align-items: center;">
                 
-                <!-- منو اصلی -->
+                
                 <ul style="display: flex; gap: 20px; list-style: none; padding: 0; margin: 0;">
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'blog' %}">Blog</a></li>
                 </ul>
 
-                <!-- لینک ایجاد پست جدید فقط در صفحه بلاگ -->
+                
                 {% if request.resolver_match.url_name == 'blog' %}
                     <a class="new-post-link" href="{% url 'post_new' %}">+ New Blog Post</a>
                 {% endif %}
 
-                <!-- وضعیت کاربر -->
+                
                 <div>
                     {% if user.is_authenticated %}
                         <span>Hi {{ user.username }}!</span>
