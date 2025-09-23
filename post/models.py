@@ -1,10 +1,16 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
+
 
 class Post(models.Model):
     body = models.TextField()
     
-    author = models.ForeignKey("auth.User", on_delete=models.CASCADE, null=False, blank=False)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null=False, blank=False
+        )
     
     title = models.CharField(max_length=255, default=" ")
     
