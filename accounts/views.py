@@ -4,6 +4,7 @@ from .forms import LoginForm, SignUpForm
 
 
 def login_view(request):
+    error = None 
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -13,18 +14,24 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 return redirect('home')
+            else:
+                error = "Username or password is incorrect."
     else:
         form = LoginForm()
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'registration/login.html', {'form': form, 'error': error})
 
 
 def signup_view(request):
+    error = None
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()        
-            login(request, user)      
-            return redirect('home')   
+            user = form.save()  
+            login(request, user)  
+            return redirect('home')
+        else:
+            error = form.errors  
     else:
         form = SignUpForm()
-    return render(request, 'registration/signup.html', {'form': form})
+        
+    return render(request, 'registration/signup.html', {'form': form, 'error': error})
