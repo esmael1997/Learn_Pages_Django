@@ -9,7 +9,7 @@ User = get_user_model()
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User             
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "email", "age", "password1", "password2")
 
 
 
@@ -22,7 +22,7 @@ class LoginForm(forms.Form):
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ("username", "email", "password1", "password2")  
+        fields = ("username", "email", "age", "password1", "password2")  
 
 
 class CustomUserChangeForm(UserChangeForm):
