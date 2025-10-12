@@ -1,0 +1,32 @@
+<!-- templates/article_list.html -->
+{% extends "base.html" %}
+{% block title %}post{% endblock title %}
+
+{% block content %}
+{% for post in post_list %}
+<div class="card">
+  <div class="card-header">
+    <span class="font-weight-bold">{{ post.title }}</span> &middot;
+    <span class="text-muted">by {{ post.author }} | {{ post.date }}</span>
+  </div>
+
+  <div class="card-body">
+    <!-- Changes start here! -->
+    <p>{{ article.body }}</p>
+    <a href="{% url 'post_edit' post.pk %}">Edit</a> |
+    <a href="{% url 'post_delete' post.pk %}">Delete</a>
+  </div>
+
+  <div class="card-footer">
+    {% for comment in post.comment_set.all %}
+    <p>
+      <span class="font-weight-bold">{{ comment.author }} &middot;</span>
+      {{ comment }}
+    </p>
+    {% endfor %}
+  </div>
+  <!-- Changes end here! -->
+</div>
+<br />
+{% endfor %}
+{% endblock content %}
