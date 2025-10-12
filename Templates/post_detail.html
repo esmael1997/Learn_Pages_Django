@@ -16,7 +16,7 @@
 <hr>
 <h4>Comments</h4>
 {% for comment in post.comment_set.all %}
-  <p><strong>{{ comment.author }}</strong> &middot; {{ comment.body }}</p>
+  <p><strong>{{ comment.author }}</strong> &middot; {{ comment }}</p>
 {% empty %}
   <p>No comments yet.</p>
 {% endfor %}
