@@ -9,9 +9,6 @@ from .forms import CommentForm
 from django.views import View 
 from django.views.generic.edit import FormView
 
-
-
-
 class Blog(LoginRequiredMixin,ListView):
     
     template_name = "blog.html" 
@@ -33,11 +30,6 @@ class BlogDetailView(LoginRequiredMixin,DetailView):
         return context
     
     
-    #def get(self, request, *args, **kwargs):
-        #view = Commentget.as_view()
-        #return view(request, *args, **kwargs)
-    
-    
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = CommentForm(request.POST)
@@ -51,10 +43,8 @@ class BlogDetailView(LoginRequiredMixin,DetailView):
             return redirect('post_detail', pk=self.object.pk)
         
         context = self.get_context_data(form=form)
-        #context['form'] = form
+        
         return self.render_to_response(context)
-    
-    
     
     
 class BlogCreateView(LoginRequiredMixin,CreateView):  
@@ -91,7 +81,7 @@ class BlogDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 class Commentget(DetailView):
     model = Post
     template_name = "post_detail.html"
-    #context_object_name = 'post'
+
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -107,7 +97,7 @@ class CommentPost(SingleObjectMixin, FormView):
         self.object = self.get_object()
         return super().post(request, *args, **kwargs)
     
-        #form = self.form_class(request.POST)
+    
     def form_valid(self, form):
         comment = form.save(commit=False)
         comment.post = self.object
